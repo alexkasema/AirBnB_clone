@@ -55,3 +55,21 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(my_dict['created_at']), str)
         self.assertEqual(my_dict['id'], self.TestModel.id)
 
+    def test_object_from_dict(self):
+        """Test creating an object from a dictionary"""
+        my_dict = self.TestModel.to_dict()
+        test1 = BaseModel(**my_dict)
+        
+        self.assertEqual(test1.id, self.TestModel.id)
+        self.assertEqual(test1.created_at, self.TestModel.created_at)
+        self.assertEqual(test1.updated_at, self.TestModel.updated_at)
+        self.assertEqual(test1.__class__.__name__,
+                         self.TestModel.__class__.__name__)
+
+    def test_to_dict_created_at(self):
+        """Test the created_at attribute"""
+        my_dict = self.TestModel.to_dict()
+        time1 = my_dict['created_at']
+
+        created_at = datetime.strptime(time1, '%Y-%m-%dT%H:%M:%S.%f')
+        self.assertEqual(self.TestModel.created_at, created_at)
