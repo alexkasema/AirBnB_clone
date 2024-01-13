@@ -70,11 +70,33 @@ class HBNBCommand(cmd.Cmd):
             return
         if not self.verify_id(command):
             return
-        key = '{}.{}'.format(command[0], commandd[1])
+        key = '{}.{}'.format(command[0], command[1])
         objs = models.storage.all()
 
         del objs[key]
         models.storage.save()
+
+    def do_all(self, args):
+        """
+        Prints all string representation of all instances
+        based or not on the class name.
+        """
+        command = args.split()
+        objs = models.storage.all()
+
+        print_all = []
+        if len(command) == 0:
+            for v in objs.values():
+                print_all.append(str(v))
+        elif command[0] in HBNBCommand.my_class_list:
+            for k, v in objs.items():
+                if command[0] in k:
+                    print_all.append(str(v))
+        else:
+            print("** class doesn't exist **")
+            return False
+
+        print(print_all)
 
     @classmethod
     def verify_class_name(cls, command):
