@@ -35,7 +35,7 @@ class Place(BaseModel):
     amenity_ids = []
 
     def __init__(self, *args, **kwargs):
-        """ Instantiating an instance of a User.
+        """ Instantiating an instance of a Place.
         Args:
             args (list): A list with arguments.
             kwargs (dict): A dictionary of arguments.
