@@ -2,7 +2,7 @@
 
 """ The State module """
 
-from base.base_model import BaseModel
+from models.base_model import BaseModel
 
 
 class State(BaseModel):
