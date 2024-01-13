@@ -6,13 +6,19 @@ import cmd
 import models
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """ The entry point of command Interpreter """
 
     prompt = '(hbnb) '
-    my_class_list = ["BaseModel", "User"]
+    my_class_list = ["BaseModel", "User", "State", "City", "Amenity",
+                     "Place", "Review"]
 
     def do_EOF(self, args):
         """ End of File implementation to exit program """
@@ -42,6 +48,21 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
         elif isinstance(new_instance, User):
+            new_instance.save()
+            print(new_instance.id)
+        elif isinstance(new_instance, State):
+            new_instance.save()
+            print(new_instance.id)
+        elif isinstance(new_instance, City):
+            new_instance.save()
+            print(new_instance.id)
+        elif isinstance(new_instance, Amenity):
+            new_instance.save()
+            print(new_instance.id)
+        elif isinstance(new_instance, Place):
+            new_instance.save()
+            print(new_instance.id)
+        elif isinstance(new_instance, Review):
             new_instance.save()
             print(new_instance.id)
         return
