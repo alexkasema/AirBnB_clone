@@ -60,6 +60,22 @@ class HBNBCommand(cmd.Cmd):
 
         print(objs[key])
 
+    def do_destroy(self, args):
+        """
+        Deletes an instance based on the class name
+        and id (save the change into the JSON file).
+        """
+        command = args.split()
+        if not self.verify_class_name(command):
+            return
+        if not self.verify_id(command):
+            return
+        key = '{}.{}'.format(command[0], commandd[1])
+        objs = models.storage.all()
+
+        del objs[key]
+        models.storage.save()
+
     @classmethod
     def verify_class_name(cls, command):
         """ verifies correct class names input """
