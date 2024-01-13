@@ -98,6 +98,28 @@ class HBNBCommand(cmd.Cmd):
 
         print(print_all)
 
+    def do_update(self, args):
+        """
+        Updates an instance based on the class name and id
+        by adding or updating attribute
+        (save the change into the JSON file)
+        """
+
+        command = args.split()
+
+        if not self.verify_class_name(command):
+            return
+        if not self.verify_id(command):
+            return
+        if not self.verify_attribute_name(command):
+            return
+
+        objs = models.storage.all()
+        key = '{}.{}'.format(command[0], command[1])
+
+        setattr(objs[key], command[2], command[3])
+        models.storage.save()
+
     @classmethod
     def verify_class_name(cls, command):
         """ verifies correct class names input """
@@ -122,6 +144,19 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return False
 
+        return True
+
+    @staticmethod
+    def verify_attribute_name(command):
+        """
+        Verifies the attributes inputted in the command
+        """
+        if len(command) < 3:
+            print("** attribute name missing **")
+            return False
+        elif len(command) < 4:
+            print("** value missing **")
+            return False
         return True
 
 
