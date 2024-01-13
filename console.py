@@ -5,13 +5,14 @@
 import cmd
 import models
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     """ The entry point of command Interpreter """
 
     prompt = '(hbnb) '
-    my_class_list = ["BaseModel"]
+    my_class_list = ["BaseModel", "User"]
 
     def do_EOF(self, args):
         """ End of File implementation to exit program """
@@ -40,7 +41,9 @@ class HBNBCommand(cmd.Cmd):
         if isinstance(new_instance, BaseModel):
             new_instance.save()
             print(new_instance.id)
-
+        elif isinstance(new_instance, User):
+            new_instance.save()
+            print(new_instance.id)
         return
 
     def do_show(self, args):

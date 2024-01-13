@@ -2,6 +2,7 @@
 """Store first object"""
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -54,6 +55,11 @@ class FileStorage:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 my_dict = json.load(f)
             for k, v in my_dict.items():
+                key_spill = k.split('.')
+                if key_split[0] == 'BaseModel':
+                    FileStorage.__objects[k] = BaseModel(**v)
+                elif key_split[0] = 'User':
+                    FileStorage.__objects[k] = User(**v)
                 FileStorage.__objects[k] = BaseModel(**v)
         except Exception:
             pass
