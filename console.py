@@ -178,6 +178,12 @@ class HBNBCommand(cmd.Cmd):
                 return
             else:
                 HBNBCommand.do_show(self, class_name + ' ' + split2[1])
+        elif command_name == 'destroy':
+            if len(split2) < 2:
+                print(" ** no instance found **")
+                return
+            else:
+                HBNBCommand.do_destroy(self, class_name + ' ' + split2[1])
 
     @classmethod
     def verify_class_name(cls, command):
