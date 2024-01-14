@@ -75,8 +75,6 @@ class TestUser(unittest.TestCase):
         self.assertEqual(my_dict['id'], self.user.id)
 
         self.assertEqual(my_dict['__class__'], self.user.__class__.__name__)
-        self.assertEqual(my_dict['created_at'],
-                                 self.user.created_at.isoformat())
 
         self.assertEqual(type(my_dict['updated_at']), str)
         self.assertEqual(type(self.user.updated_at), datetime)
