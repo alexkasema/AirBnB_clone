@@ -155,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return
 
-        obj = models.storage.all()
+        objs = models.storage.all()
         class_name = command[0]
         command_name = command[1].lower()
 
@@ -164,6 +164,14 @@ class HBNBCommand(cmd.Cmd):
 
         if command_name == "all":
             HBNBCommand.do_all(self, class_name)
+        elif command_name == "count":
+            count = 0
+
+            for k in objs.keys():
+                split_k = k.split('.')
+                if class_name == split_k[0]:
+                    count += 1
+            print(count)
 
     @classmethod
     def verify_class_name(cls, command):
