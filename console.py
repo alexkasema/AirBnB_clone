@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
 
         """Do nothing when an empty line in entered in response to prompt"""
         pass
-    
+
     def postloop(self):
         """ Do nothing after each console loop """
         pass
@@ -172,6 +172,12 @@ class HBNBCommand(cmd.Cmd):
                 if class_name == split_k[0]:
                     count += 1
             print(count)
+        elif command_name == 'show':
+            if len(split2) < 2:
+                print(" ** instance id missing **")
+                return
+            else:
+                HBNBCommand.do_show(self, class_name + ' ' + split2[1])
 
     @classmethod
     def verify_class_name(cls, command):
