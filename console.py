@@ -32,6 +32,10 @@ class HBNBCommand(cmd.Cmd):
 
         """Do nothing when an empty line in entered in response to prompt"""
         pass
+    
+    def postloop(self):
+        """ Do nothing after each console loop """
+        pass
 
     def do_create(self, args):
         """
@@ -143,6 +147,31 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(objs[key], command[2], command[3])
         models.storage.save()
+
+    def default(self, args):
+        """ called when the first input command is a class name """
+        command = args.strip().split('.')
+        if len(command) < 2:
+            print("** attribute name missing **")
+            return
+
+        objs = models.storage.all()
+        class_name = command[0]
+        command_name = command[1].lower()
+
+        split2 = command_name.strip(')').split('(')
+        command_name = split2[0]
+
+        if command_name == "all":
+            HBNBCommand.do_all(self, class_name)
+        elif command_name == "count":
+            count = 0
+
+            for k in objs.keys():
+                split_k = k.split('.')
+                if class_name == split_k[0]:
+                    count += 1
+            print(count)
 
     @classmethod
     def verify_class_name(cls, command):
