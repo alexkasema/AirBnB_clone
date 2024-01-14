@@ -184,6 +184,16 @@ class HBNBCommand(cmd.Cmd):
                 return
             else:
                 HBNBCommand.do_destroy(self, class_name + ' ' + split2[1])
+        elif command_name == 'update':
+            split3 = split2[1].split(', ')
+            if len(split3) == 0:
+                print("** no instance found **")
+                return
+            elif len(split3) < 3:
+                print("** no instance found **")
+            else:
+                HBNBCommand.do_update(self, class_name + ' ' + split3[0] +
+                                      ' ' + split3[1] + ' ' + split3[2])
 
     @classmethod
     def verify_class_name(cls, command):
